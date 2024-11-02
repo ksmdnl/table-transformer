@@ -646,7 +646,7 @@ class PDFTablesDataset(torch.utils.data.Dataset):
         target["boxes"] = bboxes
         target["labels"] = labels
         target["image_id"] = torch.as_tensor([idx])
-        target["area"] = bboxes[:, 2] * bboxes[:, 3] # COCO area
+        target["area"] = (bboxes[:, 2] - bboxes[:, 0]) * (bboxes[:, 3] - bboxes[:, 1]) # COCO area
         target["iscrowd"] = torch.zeros((num_objs,), dtype=torch.int64)
         target["orig_size"] = torch.as_tensor([int(h), int(w)])
         target["size"] = torch.as_tensor([int(h), int(w)])
